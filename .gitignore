@@ -1,0 +1,89 @@
+# ==============================================================================
+# HỆ THỐNG TỆP BỊ LOẠI BỎ (GITIGNORE) CHO DỰ ÁN BIG DATA CLUSTER
+# ==============================================================================
+
+# 1. Hệ điều hành & Editor
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+desktop.ini
+$RECYCLE.BIN/
+
+# IDE / Code Editor
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+
+# 2. Python & PySpark Caches
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+.pytest_cache/
+.ipynb_checkpoints/
+.env
+.venv
+env/
+venv/
+ENV/
+
+# 3. Hadoop & Spark Runtime Logs, Temporary Files
+*.log
+*.out
+hive-metastore.log
+hiveserver2.log
+derby.log
+metastore_db/
+spark-warehouse/
+.hive-staging*/
+checkpoint/
+*.tmp
+
+# 4. HDFS Dữ liệu lưu trữ cục bộ (Nếu có mount ra host)
+nameNode/
+dataNode/
+temp/
+hdfs_data/
+pgdata/
+
+# 5. File nén tạm tải về (Tarball / Archives)
+*.tar.gz
+*.tgz
+*.zip
+*.rar
+*.7z
+
+# 6. Scratch & Temporary Scripts
+scratch/
+guidelines.txt
+sample_report.txt
+
+# 7. File đề bài & Báo cáo mẫu của trường (.docx / .doc / .pdf)
+*.docx
+*.doc
+*.pdf
+"Bao cao cuoi ki ECOSYSTEM nhom 5.docx"
+"HƯỚNG DẪN LÀM BÀI TẬP CUỐI KỲ BIG DATA ESSENTIALS - HKI 2026 - 2027.docx"
+

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type="text/xsl" href="configuration.xsl"?>
+<configuration>
+    <!-- Số lượng bản sao lưu trữ trên 3 worker nodes -->
+    <property>
+        <name>dfs.replication</name>
+        <value>3</value>
+    </property>
+
+    <!-- Thư mục lưu metadata trên toan-master -->
+    <property>
+        <name>dfs.namenode.name.dir</name>
+        <value>file:///home/hadoop/hdfs/nameNode</value>
+    </property>
+
+    <!-- Thư mục lưu các block dữ liệu thật trên các workers -->
+    <property>
+        <name>dfs.datanode.data.dir</name>
+        <value>file:///home/hadoop/hdfs/dataNode</value>
+    </property>
+
+    <!-- Địa chỉ Secondary NameNode hỗ trợ checkpoint metadata -->
+    <property>
+        <name>dfs.namenode.secondary.http-address</name>
+        <value>toan-master:9868</value>
+    </property>
+
+    <!-- Tắt kiểm tra quyền nghiêm ngặt để nhóm thực hành lab thuận lợi -->
+    <property>
+        <name>dfs.permissions.enabled</name>
+        <value>false</value>
+    </property>
+</configuration>

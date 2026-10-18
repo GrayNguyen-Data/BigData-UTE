@@ -1,0 +1,18 @@
+Big data is a field that treats ways to analyze, systematically extract information from, or otherwise deal with data sets that are too large or complex to be dealt with by traditional data processing application software.
+Data with many entries offers greater statistical power, while data with higher complexity may lead to a higher false discovery rate.
+Big data analysis challenges include capturing data, data storage, data analysis, search, sharing, transfer, visualization, querying, updating, information privacy, and data source.
+Big data was originally associated with three key concepts: volume, variety, and velocity.
+When we handle big data, we may not sample but simply observe and track what happens.
+Therefore, big data often includes data with sizes that exceed the capacity of traditional software to process within an acceptable time and value.
+Current usage of the term big data tends to refer to the use of predictive analytics, user behavior analytics, or certain other advanced data analytics methods that extract value from data.
+Scientists, business executives, practitioners of medicine, advertising, and governments alike regularly meet difficulties with large data-sets in areas including Internet searches, fintech, urban informatics, and business informatics.
+Scientists encounter limitations in e-science work, including meteorology, genomics, connectomics, complex physics simulations, biology, and environmental research.
+Apache Hadoop is an open-source software framework for storing data and running applications on clusters of commodity hardware.
+It provides massive storage for any kind of data, enormous processing power, and the ability to handle virtually limitless concurrent tasks or jobs.
+Hadoop MapReduce is a software framework for easily writing applications which process vast amounts of data in-parallel on large clusters of commodity hardware in a reliable, fault-tolerant manner.
+Apache Spark is a multi-language engine for executing data engineering, data science, and machine learning on single-node machines or clusters.
+Spark provides high-level APIs in Java, Scala, Python, and R, and an optimized engine that supports general execution graphs.
+It also supports a rich set of higher-level tools including Spark SQL for SQL and structured data processing, pandas API on Spark, MLlib for machine learning, GraphX for computing graphs, and Structured Streaming for incremental computation and stream processing.
+Distributed computing on clusters enables resilient distributed datasets to partition computations across multiple worker nodes efficiently.
+Word count and statistical aggregations like mean, median, and standard deviation allow engineers to extract valuable metrics from unstructured text datasets.
+By leveraging Hadoop Distributed File System, Apache Hive Warehouse, and Apache Spark on YARN, organizations can scale their data infrastructure seamlessly and cost-effectively.

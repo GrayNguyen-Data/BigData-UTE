@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type="text/xsl" href="configuration.xsl"?>
+<configuration>
+    <!-- Khai báo NameNode mặc định của cụm nằm trên toan-master port 9000 -->
+    <property>
+        <name>fs.defaultFS</name>
+        <value>hdfs://toan-master:9000</value>
+    </property>
+
+    <!-- Thư mục tạm lưu trữ dữ liệu đệm của Hadoop -->
+    <property>
+        <name>hadoop.tmp.dir</name>
+        <value>/home/hadoop/hdfs/temp</value>
+    </property>
+
+    <!-- Cho phép user hadoop đóng vai trò proxy user kết nối từ Hive & Spark -->
+    <property>
+        <name>hadoop.proxyuser.hadoop.hosts</name>
+        <value>*</value>
+    </property>
+    <property>
+        <name>hadoop.proxyuser.hadoop.groups</name>
+        <value>*</value>
+    </property>
+</configuration>

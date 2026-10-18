@@ -1,0 +1,134 @@
+version: '3.8'
+
+services:
+  # 1. Cơ sở dữ liệu lưu Metastore cho Apache Hive
+  postgres-metastore:
+    image: postgres:15-alpine
+    container_name: postgres-metastore
+    hostname: postgres-metastore
+    environment:
+      POSTGRES_DB: metastore_db
+      POSTGRES_USER: hiveuser
+      POSTGRES_PASSWORD: hivepassword
+    networks:
+      bigdata_net:
+        ipv4_address: 172.28.0.6
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    restart: always
+
+  # 2. Node Master: Toàn điều hành cụm (NameNode, ResourceManager, Hive, Spark Master)
+  toan-master:
+    image: bigdata-cluster:3.3.6
+    container_name: toan-master
+    hostname: toan-master
+    environment:
+      - NODE_ROLE=master
+    volumes:
+      - ./config/core-site.xml:/opt/hadoop/etc/hadoop/core-site.xml
+      - ./config/hdfs-site.xml:/opt/hadoop/etc/hadoop/hdfs-site.xml
+      - ./config/yarn-site.xml:/opt/hadoop/etc/hadoop/yarn-site.xml
+      - ./config/mapred-site.xml:/opt/hadoop/etc/hadoop/mapred-site.xml
+      - ./config/workers:/opt/hadoop/etc/hadoop/workers
+      - ./config/hive-site.xml:/opt/hive/conf/hive-site.xml
+      - ./config/spark-defaults.conf:/opt/spark/conf/spark-defaults.conf
+      - ./pyspark_jobs:/home/hadoop/pyspark_jobs
+      - ./data:/home/hadoop/shared_data
+      - ./scripts:/home/hadoop/scripts  
+      - master_hdfs:/home/hadoop/hdfs
+      
+    ports:
+      - "9870:9870"   # HDFS NameNode Web UI
+      - "9000:9000" # HDFS Default FileSystem 
+      - "8088:8088"   # YARN ResourceManager Web UI
+      - "19888:19888" # MapReduce JobHistory Web UI
+      - "10000:10000" # HiveServer2 JDBC Port
+      - "10002:10002" # HiveServer2 Web UI
+      - "8080:8080"   # Spark Master Web UI
+      - "4040:4040"   # Spark Application UI
+    depends_on:
+      - postgres-metastore
+    networks:
+      bigdata_net:
+        ipv4_address: 172.28.0.2
+
+  # 3. Node Worker 1: Anh (DataNode, NodeManager)
+  anh-slave1:
+    image: bigdata-cluster:3.3.6
+    container_name: anh-slave1
+    hostname: anh-slave1
+    environment:
+      - NODE_ROLE=worker
+    volumes:
+      - ./config/core-site.xml:/opt/hadoop/etc/hadoop/core-site.xml
+      - ./config/hdfs-site.xml:/opt/hadoop/etc/hadoop/hdfs-site.xml
+      - ./config/yarn-site.xml:/opt/hadoop/etc/hadoop/yarn-site.xml
+      - ./config/mapred-site.xml:/opt/hadoop/etc/hadoop/mapred-site.xml
+      - ./config/workers:/opt/hadoop/etc/hadoop/workers
+      - ./scripts:/home/hadoop/scripts  
+      - slave1_hdfs:/home/hadoop/hdfs
+      
+    depends_on:
+      - toan-master
+    networks:
+      bigdata_net:
+        ipv4_address: 172.28.0.3
+
+  # 4. Node Worker 2: Huy (DataNode, NodeManager)
+  huy-slave2:
+    image: bigdata-cluster:3.3.6
+    container_name: huy-slave2
+    hostname: huy-slave2
+    environment:
+      - NODE_ROLE=worker
+    volumes:
+      - ./config/core-site.xml:/opt/hadoop/etc/hadoop/core-site.xml
+      - ./config/hdfs-site.xml:/opt/hadoop/etc/hadoop/hdfs-site.xml
+      - ./config/yarn-site.xml:/opt/hadoop/etc/hadoop/yarn-site.xml
+      - ./config/mapred-site.xml:/opt/hadoop/etc/hadoop/mapred-site.xml
+      - ./config/workers:/opt/hadoop/etc/hadoop/workers
+      - ./scripts:/home/hadoop/scripts  
+      - slave2_hdfs:/home/hadoop/hdfs
+      
+    depends_on:
+      - toan-master
+    networks:
+      bigdata_net:
+        ipv4_address: 172.28.0.4
+
+  # 5. Node Worker 3: Khoa (DataNode, NodeManager)
+  khoa-slave3:
+    image: bigdata-cluster:3.3.6
+    container_name: khoa-slave3
+    hostname: khoa-slave3
+    environment:
+      - NODE_ROLE=worker
+    volumes:
+      - ./config/core-site.xml:/opt/hadoop/etc/hadoop/core-site.xml
+      - ./config/hdfs-site.xml:/opt/hadoop/etc/hadoop/hdfs-site.xml
+      - ./config/yarn-site.xml:/opt/hadoop/etc/hadoop/yarn-site.xml
+      - ./config/mapred-site.xml:/opt/hadoop/etc/hadoop/mapred-site.xml
+      - ./config/workers:/opt/hadoop/etc/hadoop/workers
+      - ./scripts:/home/hadoop/scripts  
+      - slave3_hdfs:/home/hadoop/hdfs
+
+    depends_on:
+      - toan-master
+    networks:
+      bigdata_net:
+        ipv4_address: 172.28.0.5
+
+networks:
+  bigdata_net:
+    driver: bridge
+    ipam:
+      driver: default
+      config:
+        - subnet: 172.28.0.0/16
+
+volumes:
+  pgdata:
+  master_hdfs:
+  slave1_hdfs:
+  slave2_hdfs:
+  slave3_hdfs:

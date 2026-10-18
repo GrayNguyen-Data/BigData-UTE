@@ -1,0 +1,21 @@
+order_id,customer_name,product,category,quantity,price,order_date,city
+1001,Toan Nguyen,Laptop Dell XPS,Electronics,1,1500.0,2026-01-10,Ho Chi Minh
+1002,Anh Le,iPhone 15 Pro,Electronics,2,1100.0,2026-01-11,Ha Noi
+1003,Huy Pham,Office Ergonomic Chair,Furniture,4,150.0,2026-01-12,Da Nang
+1004,Khoa Tran,Standing Desk Pro,Furniture,1,450.0,2026-01-12,Can Tho
+1005,Toan Nguyen,Wireless Mouse MX,Electronics,3,25.0,2026-01-13,Ho Chi Minh
+1006,Anh Le,Wooden Bookshelf,Furniture,2,85.0,2026-01-14,Ha Noi
+1007,Huy Pham,Mechanical Keyboard,Electronics,2,95.0,2026-01-15,Da Nang
+1008,Khoa Tran,UltraWide 4K Monitor,Electronics,1,600.0,2026-01-16,Can Tho
+1009,Bao Hoang,Dining Table Set,Furniture,1,750.0,2026-01-17,Hai Phong
+1010,Minh Vu,USB-C Docking Station,Electronics,2,120.0,2026-01-18,Ho Chi Minh
+1011,Linh Do,Bedside Lamp Modern,Furniture,3,40.0,2026-01-19,Ha Noi
+1012,Quang Mai,Noise Cancelling Headset,Electronics,1,280.0,2026-01-20,Da Nang
+1013,Trang Pham,Leather Office Sofa,Furniture,1,900.0,2026-01-21,Ho Chi Minh
+1014,Duc Nguyen,Smartwatch Series 9,Electronics,2,350.0,2026-01-22,Ha Noi
+1015,Huong Le,Filing Cabinet 3-Drawers,Furniture,2,110.0,2026-01-23,Can Tho
+1016,Toan Nguyen,Portable SSD 2TB,Electronics,2,180.0,2026-01-24,Ho Chi Minh
+1017,Anh Le,Conference Table Large,Furniture,1,1200.0,2026-01-25,Ha Noi
+1018,Huy Pham,Gaming Chair RGB,Furniture,1,260.0,2026-01-26,Da Nang
+1019,Khoa Tran,Bluetooth Speaker Max,Electronics,2,80.0,2026-01-27,Can Tho
+1020,Minh Vu,Adjustable Footrest,Furniture,3,35.0,2026-01-28,Ho Chi Minh
