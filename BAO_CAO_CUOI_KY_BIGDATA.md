@@ -21,7 +21,7 @@
 | **1** | **Nguyễn Đức Toàn** *(Trưởng nhóm)* | **Master Node** (`toan-master`)   | - Thiết kế kiến trúc mạng ảo Docker `bigdata_net` và cụm 5 container.- Cấu hình NameNode, SecondaryNameNode, ResourceManager, JobHistoryServer.- Thiết lập Apache Hive Warehouse kết nối PostgreSQL Metastore.- Thực thi kịch bản Data Warehouse phân tích doanh thu bán lẻ.- Phân tích nâng cao bằng PySpark DataFrame SQL trên YARN. |      **100%**      |
 | **2** | **Lê Tuấn Anh**                            | **Worker Node 1** (`anh-slave1`)  | - Cấu hình DataNode 1 & NodeManager 1.- Viết mã nguồn & thực thi **Bài toán 1: WordCount** bằng PySpark trên YARN.- Kiểm tra phân vùng dữ liệu và đo lường tần suất từ.                                                                                                                                                                |      **100%**      |
 | **3** | **Phạm Quốc Huy**                          | **Worker Node 2** (`huy-slave2`)  | - Cấu hình DataNode 2 & NodeManager 2.- Viết mã nguồn & thực thi **Bài toán 2: WordMean** (độ dài trung bình của từ).- Viết mã nguồn & thực thi **Bài toán 3: WordMedian** (trung vị độ dài của từ).                                                                                                                         |      **100%**      |
-| **4** | **Trần Đăng Khoa**                        | **Worker Node 3** (`khoa-slave3`) | - Cấu hình DataNode 3 & NodeManager 3.- Viết mã nguồn & thực thi **Bài toán 4: WordStandardDeviation** (độ lệch chuẩn độ dài từ).- Đo đạc hiệu năng phân tán MapReduce và kiểm tra tính chịu lỗi của cụm.                                                                                                                      |      **100%**      |
+| **4** | **Phạm Đức Khoa**                         | **Worker Node 3** (`khoa-slave3`) | - Cấu hình DataNode 3 & NodeManager 3.- Viết mã nguồn & thực thi **Bài toán 4: WordStandardDeviation** (độ lệch chuẩn độ dài từ).- Đo đạc hiệu năng phân tán MapReduce và kiểm tra tính chịu lỗi của cụm.                                                                                                                      |      **100%**      |
 
 ---
 
@@ -79,7 +79,7 @@ Hệ thống được ảo hóa bằng Docker Compose trên subnet tĩnh `172.28
 |         ||                                              ||                                       |
 |         || (HDFS RPC 9000 & YARN NodeManager 8042)      ||                                       |
 |         v                                               v                                        |
-|  [anh-slave1: 172.28.0.3]             [huy-slave2: 172.28.0.4]          [khoa-slave3: 172.28.0.5]|
+|  [anh-slave1: 172.28.0.3]             [huy-slave2: 172.28.0.4]          [hakhoa-slave3: 172.28.0.5]|
 |   DataNode + NodeManager               DataNode + NodeManager            DataNode + NodeManager  |
 +--------------------------------------------------------------------------------------------------+
 ```
