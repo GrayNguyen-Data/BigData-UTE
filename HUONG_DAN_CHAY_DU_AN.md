@@ -1,11 +1,13 @@
 # HƯỚNG DẪN THỰC THI DỰ ÁN CHO THÀNH VIÊN NHÓM
+
 ## Đề tài: Cụm Big Data Phân Tán (Hadoop, YARN, Hive, Spark) trên Docker Multi-Node
 
-Tài liệu này hướng dẫn chi tiết từng bước từ A đến Z dành cho các thành viên trong nhóm (**Nguyễn Đức Toàn**, **Lê Tuấn Anh**, **Phạm Quốc Huy**, **Trần Đăng Khoa**) để khởi động cụm, viết mã nguồn bài toán được phân công, nộp job lên YARN và chụp ảnh minh chứng làm báo cáo.
+Tài liệu này hướng dẫn chi tiết từng bước từ A đến Z dành cho các thành viên trong nhóm (**Nguyễn Đức Toàn**, **Lê Tuấn Anh**, **Phạm Quốc Huy**, **Phạm Đức Khoa**) để khởi động cụm, viết mã nguồn bài toán được phân công, nộp job lên YARN và chụp ảnh minh chứng làm báo cáo.
 
 ---
 
 ## ⚙️ 1. YÊU CẦU BAN ĐẦU
+
 1. Máy tính đã cài đặt **Docker Desktop** (và Docker Desktop đang ở trạng thái **Running**).
 2. Đã tải hoặc clone thư mục dự án `Bigdata-project` về máy tính.
 3. Mở phần mềm dòng lệnh (**PowerShell** trên Windows hoặc **Terminal** trên macOS/Linux) tại thư mục `Bigdata-project`.
@@ -15,28 +17,37 @@ Tài liệu này hướng dẫn chi tiết từng bước từ A đến Z dành 
 ## 🚀 2. QUY TRÌNH THỰC THI TỪNG BƯỚC
 
 ### BƯỚC 1: Khởi động Cụm 5 Container Docker
+
 Mở PowerShell tại thư mục dự án `Bigdata-project`, chạy lệnh:
+
 ```powershell
 docker compose up -d
 ```
+
 Kiểm tra trạng thái các container:
+
 ```powershell
 docker compose ps
 ```
+
 > **Yêu cầu đạt được**: Thấy đủ 5 container (`toan-master`, `anh-slave1`, `huy-slave2`, `khoa-slave3`, `postgres-metastore`) đều hiển thị trạng thái **Up**.
 
 ---
 
 ### BƯỚC 2: Đăng nhập vào Master Node (`toan-master`)
+
 Chạy lệnh:
+
 ```powershell
 docker exec -it toan-master bash
 ```
+
 > Lúc này con trỏ terminal sẽ chuyển thành: `hadoop@toan-master:~$` (nghĩa là bạn đã ở bên trong máy chủ Master).
 
 ---
 
 ### BƯỚC 3: Khởi động các Dịch vụ và Nạp Dữ liệu lên HDFS
+
 Trong terminal `hadoop@toan-master:~$`, chạy lần lượt các script tự động:
 
 ```bash
@@ -52,10 +63,13 @@ bash /home/hadoop/scripts/start-hive.sh
 
 **Kiểm tra tiến trình Java (JPS)**:
 Gõ lệnh:
+
 ```bash
 jps
 ```
+
 Trên `toan-master` cần hiển thị đủ các dịch vụ:
+
 - `NameNode`
 - `SecondaryNameNode`
 - `ResourceManager`
@@ -66,14 +80,15 @@ Trên `toan-master` cần hiển thị đủ các dịch vụ:
 ---
 
 ### BƯỚC 4: Viết Mã Nguồn Thuật Toán Được Phân Công
+
 Các bạn mở VS Code trên máy thật của mình và mở file tương ứng trong thư mục `pyspark_jobs/`:
 
-| Thành viên | File cần chỉnh sửa | Bài toán đảm nhiệm |
-|:---|:---|:---|
-| **Lê Tuấn Anh** | `pyspark_jobs/01_workcount.py` | **WordCount**: Đếm tần suất xuất hiện của từ |
-| **Phạm Quốc Huy** | `pyspark_jobs/02_wordmean.py` | **WordMean**: Tính độ dài trung bình của từ |
-| **Phạm Quốc Huy** | `pyspark_jobs/03_wordmedian.py` | **WordMedian**: Tính trung vị độ dài của từ |
-| **Trần Đăng Khoa** | `pyspark_jobs/04_workstd.py` | **WordStd**: Tính độ lệch chuẩn độ dài từ |
+| Thành viên                  | File cần chỉnh sửa                      | Bài toán đảm nhiệm                                                |
+| :---------------------------- | :----------------------------------------- | :--------------------------------------------------------------------- |
+| **Lê Tuấn Anh**       | `pyspark_jobs/01_workcount.py`           | **WordCount**: Đếm tần suất xuất hiện của từ             |
+| **Phạm Quốc Huy**     | `pyspark_jobs/02_wordmean.py`            | **WordMean**: Tính độ dài trung bình của từ               |
+| **Phạm Quốc Huy**     | `pyspark_jobs/03_wordmedian.py`          | **WordMedian**: Tính trung vị độ dài của từ               |
+| **Phạm Đức Khoa**    | `pyspark_jobs/04_workstd.py`             | **WordStd**: Tính độ lệch chuẩn độ dài từ               |
 | **Nguyễn Đức Toàn** | `pyspark_jobs/05_ecommerce_analytics.py` | **Retail Analytics**: Phân tích dữ liệu bán hàng Spark SQL |
 
 > **Lưu ý cực kỳ tiện lợi**: Thư mục `pyspark_jobs/` trên máy thật được gắn trực tiếp (Volume Mount) vào `/home/hadoop/pyspark_jobs/` bên trong container. Do đó, bạn chỉ cần sửa code và bấm Save (Ctrl + S) trên máy thật, trong container sẽ được cập nhật ngay lập tức mà **không cần copy lại**.
@@ -81,25 +96,30 @@ Các bạn mở VS Code trên máy thật của mình và mở file tương ứn
 ---
 
 ### BƯỚC 5: Nộp Job PySpark lên Cụm YARN Cluster
+
 Quay lại terminal `hadoop@toan-master:~$` và gõ lệnh chạy tương ứng bài của mình:
 
 #### 1. Bài của bạn Lê Tuấn Anh:
+
 ```bash
 spark-submit --master yarn /home/hadoop/pyspark_jobs/01_workcount.py
 ```
 
 #### 2. Bài của bạn Phạm Quốc Huy:
+
 ```bash
 spark-submit --master yarn /home/hadoop/pyspark_jobs/02_wordmean.py
 spark-submit --master yarn /home/hadoop/pyspark_jobs/03_wordmedian.py
 ```
 
-#### 3. Bài của bạn Trần Đăng Khoa:
+#### 3. Bài của bạn Phạm Đức Khoa:
+
 ```bash
 spark-submit --master yarn /home/hadoop/pyspark_jobs/04_workstd.py
 ```
 
 #### 4. Bài của bạn Nguyễn Đức Toàn:
+
 ```bash
 spark-submit --master yarn /home/hadoop/pyspark_jobs/05_ecommerce_analytics.py
 ```
@@ -107,12 +127,16 @@ spark-submit --master yarn /home/hadoop/pyspark_jobs/05_ecommerce_analytics.py
 ---
 
 ### BƯỚC 6: Demo Apache Hive Data Warehouse (Dành cho phần Warehouse)
+
 Nếu cần chụp ảnh demo Data Warehouse của Apache Hive:
+
 ```bash
 # 1. Mở Hive CLI trên toan-master:
 hive
 ```
+
 Trong dấu nhắc `hive>`, copy và dán đoạn lệnh SQL này:
+
 ```sql
 USE retail_warehouse;
 
@@ -144,6 +168,7 @@ SELECT
 FROM sales_records
 GROUP BY category;
 ```
+
 *(Chờ MapReduce chạy xong, gõ `exit;` để thoát Hive).*
 
 ---

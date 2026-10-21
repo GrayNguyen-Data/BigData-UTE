@@ -1,9 +1,11 @@
 # BÁO CÁO CUỐI KỲ MÔN NHẬP MÔN DỮ LIỆU LỚN
+
 # ĐỀ TÀI: XÂY DỰNG CỤM BIG DATA PHÂN TÁN MULTI-NODE (HADOOP, YARN, HIVE, SPARK) TRÊN DOCKER VÀ THỰC THI 4 THUẬT TOÁN MAPREDUCE BẰNG PYSPARK
 
 ---
 
 ## 🏛️ THÔNG TIN CHUNG
+
 - **Trường**: Đại học Sư Phạm Kỹ Thuật TP. Hồ Chí Minh
 - **Khoa**: Công nghệ Thông tin
 - **Môn học**: Nhập môn Dữ liệu lớn (Big Data Essentials)
@@ -14,20 +16,22 @@
 
 ## 👥 BẢNG PHÂN CÔNG NHIỆM VỤ VÀ ĐÁNH GIÁ (100% HOÀN THÀNH)
 
-| STT | Họ và Tên | Vai trò / Node Cluster | Nhiệm vụ chi tiết được phân công | Đánh giá hoàn thành |
-|:---:|:---|:---|:---|:---:|
-| **1** | **Nguyễn Đức Toàn** *(Trưởng nhóm)* | **Master Node** (`toan-master`) | - Thiết kế kiến trúc mạng ảo Docker `bigdata_net` và cụm 5 container.<br>- Cấu hình NameNode, SecondaryNameNode, ResourceManager, JobHistoryServer.<br>- Thiết lập Apache Hive Warehouse kết nối PostgreSQL Metastore.<br>- Thực thi kịch bản Data Warehouse phân tích doanh thu bán lẻ.<br>- Phân tích nâng cao bằng PySpark DataFrame SQL trên YARN. | **100%** |
-| **2** | **Lê Tuấn Anh** | **Worker Node 1** (`anh-slave1`) | - Cấu hình DataNode 1 & NodeManager 1.<br>- Viết mã nguồn & thực thi **Bài toán 1: WordCount** bằng PySpark trên YARN.<br>- Kiểm tra phân vùng dữ liệu và đo lường tần suất từ. | **100%** |
-| **3** | **Phạm Quốc Huy** | **Worker Node 2** (`huy-slave2`) | - Cấu hình DataNode 2 & NodeManager 2.<br>- Viết mã nguồn & thực thi **Bài toán 2: WordMean** (độ dài trung bình của từ).<br>- Viết mã nguồn & thực thi **Bài toán 3: WordMedian** (trung vị độ dài của từ). | **100%** |
-| **4** | **Trần Đăng Khoa** | **Worker Node 3** (`khoa-slave3`) | - Cấu hình DataNode 3 & NodeManager 3.<br>- Viết mã nguồn & thực thi **Bài toán 4: WordStandardDeviation** (độ lệch chuẩn độ dài từ).<br>- Đo đạc hiệu năng phân tán MapReduce và kiểm tra tính chịu lỗi của cụm. | **100%** |
+|     STT     | Họ và Tên                                       | Vai trò / Node Cluster                   | Nhiệm vụ chi tiết được phân công                                                                                                                                                                                                                                                                                                                           | Đánh giá hoàn thành |
+| :---------: | :------------------------------------------------- | :---------------------------------------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :----------------------: |
+| **1** | **Nguyễn Đức Toàn** *(Trưởng nhóm)* | **Master Node** (`toan-master`)   | - Thiết kế kiến trúc mạng ảo Docker `bigdata_net` và cụm 5 container.- Cấu hình NameNode, SecondaryNameNode, ResourceManager, JobHistoryServer.- Thiết lập Apache Hive Warehouse kết nối PostgreSQL Metastore.- Thực thi kịch bản Data Warehouse phân tích doanh thu bán lẻ.- Phân tích nâng cao bằng PySpark DataFrame SQL trên YARN. |      **100%**      |
+| **2** | **Lê Tuấn Anh**                            | **Worker Node 1** (`anh-slave1`)  | - Cấu hình DataNode 1 & NodeManager 1.- Viết mã nguồn & thực thi **Bài toán 1: WordCount** bằng PySpark trên YARN.- Kiểm tra phân vùng dữ liệu và đo lường tần suất từ.                                                                                                                                                                |      **100%**      |
+| **3** | **Phạm Quốc Huy**                          | **Worker Node 2** (`huy-slave2`)  | - Cấu hình DataNode 2 & NodeManager 2.- Viết mã nguồn & thực thi **Bài toán 2: WordMean** (độ dài trung bình của từ).- Viết mã nguồn & thực thi **Bài toán 3: WordMedian** (trung vị độ dài của từ).                                                                                                                         |      **100%**      |
+| **4** | **Phạm Đức Khoa**                         | **Worker Node 3** (`khoa-slave3`) | - Cấu hình DataNode 3 & NodeManager 3.- Viết mã nguồn & thực thi **Bài toán 4: WordStandardDeviation** (độ lệch chuẩn độ dài từ).- Đo đạc hiệu năng phân tán MapReduce và kiểm tra tính chịu lỗi của cụm.                                                                                                                      |      **100%**      |
 
 ---
 
 # PHẦN 1: CƠ SỞ LÝ THUYẾT HỆ SINH THÁI BIG DATA
 
 ## 1.1. Apache Hadoop
+
 Apache Hadoop là một nền tảng mã nguồn mở (Apache Software Foundation) cho phép lưu trữ và xử lý phân tán các tập dữ liệu cực lớn (Big Data) trên các cụm máy tính phổ thông (Commodity Hardware).
 Ba trụ cột cốt lõi của Hadoop:
+
 1. **HDFS (Hadoop Distributed File System)**:
    - Lưu trữ dữ liệu dạng khối (Block-based storage), mặc định mỗi block 128 MB.
    - Áp dụng cơ chế **Replication** (nhân bản 3 bản sao trên 3 DataNode khác nhau) để đảm bảo an toàn tuyệt đối khi có node bị sập (Fault Tolerance).
@@ -42,12 +46,14 @@ Ba trụ cột cốt lõi của Hadoop:
    - Cơ chế **Data Locality**: Map task được ưu tiên chạy ngay tại node đang chứa block dữ liệu trên HDFS để giảm tối đa chi phí truyền tải qua mạng (Network I/O).
 
 ## 1.2. Apache Hive
+
 - Apache Hive là một hệ thống Data Warehouse phân tán được xây dựng trên nền tảng Hadoop.
 - Hive cung cấp ngôn ngữ **HiveQL (HQL)** có cú pháp tương tự SQL chuẩn, giúp lập trình viên không cần viết mã Java MapReduce phức tạp mà vẫn truy vấn được hàng triệu bản ghi trên HDFS.
 - **Hive Metastore**: Lưu trữ cấu trúc schema bảng (tên cột, kiểu dữ liệu, định dạng file, đường dẫn HDFS) vào hệ quản trị cơ sở dữ liệu quan hệ (RDBMS) như **PostgreSQL** hoặc MySQL.
 - Khi người dùng gửi câu lệnh SQL, Hive Compiler sẽ phân tích cú pháp (AST) -> Tối ưu hóa kế hoạch thực thi (Logical/Physical Plan) -> Dịch thành các Job **MapReduce** và nộp lên YARN để thực thi song song.
 
 ## 1.3. Apache Spark & PySpark
+
 - Apache Spark là engine tính toán phân tán thế hệ mới với khả năng **xử lý trong bộ nhớ (In-Memory Processing)**, khắc phục nhược điểm ghi đọc liên tục xuống đĩa cứng của MapReduce cổ điển (nhanh hơn từ 10 đến 100 lần).
 - **RDD (Resilient Distributed Dataset)**: Cấu trúc dữ liệu phân tán có khả năng chịu lỗi, hỗ trợ 2 nhóm phép toán:
   - *Transformations* (Lazy Evaluation): `map`, `flatMap`, `filter`, `reduceByKey`, `sortBy`, `zipWithIndex`.
@@ -59,6 +65,7 @@ Ba trụ cột cốt lõi của Hadoop:
 # PHẦN 2: THIẾT KẾ VÀ CÀI ĐẶT CỤM DOCKER MULTI-NODE
 
 ## 2.1. Kiến trúc cụm 5 Container trên mạng Docker Bridge
+
 Hệ thống được ảo hóa bằng Docker Compose trên subnet tĩnh `172.28.0.0/16`:
 
 ```
@@ -72,7 +79,7 @@ Hệ thống được ảo hóa bằng Docker Compose trên subnet tĩnh `172.28
 |         ||                                              ||                                       |
 |         || (HDFS RPC 9000 & YARN NodeManager 8042)      ||                                       |
 |         v                                               v                                        |
-|  [anh-slave1: 172.28.0.3]             [huy-slave2: 172.28.0.4]          [khoa-slave3: 172.28.0.5]|
+|  [anh-slave1: 172.28.0.3]             [huy-slave2: 172.28.0.4]          [hakhoa-slave3: 172.28.0.5]|
 |   DataNode + NodeManager               DataNode + NodeManager            DataNode + NodeManager  |
 +--------------------------------------------------------------------------------------------------+
 ```
@@ -80,25 +87,30 @@ Hệ thống được ảo hóa bằng Docker Compose trên subnet tĩnh `172.28
 ## 2.2. Phân tích các thông số cấu hình quan trọng (Configuration Files)
 
 ### 1. `core-site.xml`
+
 - `fs.defaultFS = hdfs://toan-master:9000`: Định danh hệ thống tệp mặc định là HDFS trỏ về node Master.
 - `hadoop.proxyuser.hadoop.hosts = *`: Cấp quyền proxy cho user hadoop kết nối từ các dịch vụ ngoài (HiveServer2, Spark).
 
 ### 2. `hdfs-site.xml`
+
 - `dfs.replication = 3`: Nhân bản dữ liệu thành 3 bản sao trải đều trên 3 node worker (`anh-slave1`, `huy-slave2`, `khoa-slave3`).
 - `dfs.namenode.name.dir = file:///home/hadoop/hdfs/nameNode`: Thư mục lưu metadata trên Master.
 - `dfs.datanode.data.dir = file:///home/hadoop/hdfs/dataNode`: Thư mục lưu các block thực tế trên Worker.
 
 ### 3. `yarn-site.xml`
+
 - `yarn.resourcemanager.hostname = toan-master`: Định nghĩa máy chủ điều phối tài nguyên.
 - `yarn.nodemanager.aux-services = mapreduce_shuffle`: Kích hoạt dịch vụ tráo đổi dữ liệu (Shuffle) giữa các node.
 - `yarn.nodemanager.vmem-check-enabled = false`: Tắt kiểm tra bộ nhớ ảo để tránh YARN vô tình kill container chạy trong môi trường Docker.
 - `yarn.application.classpath`: Khai báo toàn bộ đường dẫn thư viện JAR của Hadoop để các worker container tìm nạp class thực thi.
 
 ### 4. `mapred-site.xml`
+
 - `mapreduce.framework.name = yarn`: Bắt buộc MapReduce phải chạy thông qua YARN điều phối.
 - `yarn.app.mapreduce.am.env = HADOOP_MAPRED_HOME=/opt/hadoop`: **Cấu hình tối quan trọng trên Hadoop 3**, giải quyết triệt để lỗi `ClassNotFoundException: MRAppMaster`.
 
 ### 5. `hive-site.xml`
+
 - `javax.jdo.option.ConnectionURL = jdbc:postgresql://postgres-metastore:5432/metastore_db`: Trỏ Metastore về database PostgreSQL độc lập.
 - `hive.metastore.uris = thrift://toan-master:9083`: Cổng dịch vụ Thrift của Hive Metastore.
 
@@ -107,9 +119,11 @@ Hệ thống được ảo hóa bằng Docker Compose trên subnet tĩnh `172.28
 # PHẦN 3: THỰC THI TRIỂN KHAI DATA WAREHOUSE VỚI APACHE HIVE
 
 ## 3.1. Kịch bản nạp dữ liệu và tạo bảng Data Warehouse
+
 Dữ liệu nguồn là tập tin `sales_data.csv` (chứa các thông tin giao dịch bán lẻ gồm `order_id`, `customer_name`, `product`, `category`, `quantity`, `price`, `order_date`, `city`).
 
 ### Bước 1: Khởi tạo Database và Table trong Hive
+
 ```sql
 CREATE DATABASE IF NOT EXISTS retail_warehouse;
 USE retail_warehouse;
@@ -131,9 +145,11 @@ tblproperties('skip.header.line.count'='1');
 ```
 
 ### Bước 2: Nạp dữ liệu vào bảng (Bulk Loading)
+
 ```sql
 LOAD DATA LOCAL INPATH '/home/hadoop/shared_data/sales_data.csv' OVERWRITE INTO TABLE sales_records;
 ```
+
 *Thời gian thực thi: 2.839 giây (Dữ liệu được nạp trực tiếp vào HDFS tại thư mục `/user/hive/warehouse/retail_warehouse.db/sales_records`).*
 
 ---
@@ -141,6 +157,7 @@ LOAD DATA LOCAL INPATH '/home/hadoop/shared_data/sales_data.csv' OVERWRITE INTO 
 ## 3.2. Thực thi câu truy vấn phân tích (Hive MapReduce trên YARN)
 
 ### Câu truy vấn HiveQL:
+
 ```sql
 SELECT 
     category, 
@@ -152,6 +169,7 @@ GROUP BY category;
 ```
 
 ### Quá trình phân tích thực thi của cụm:
+
 1. **Biên dịch & Tối ưu hóa**: Hive phân tích câu lệnh `GROUP BY category`, dịch thành 1 Job MapReduce phân tán trên YARN (`job_1792292895907_0005`).
 2. **Map Phase**: YARN cấp phát Mapper container trên worker node. Mapper đọc từng dòng CSV, trích xuất `key = category` và `value = (quantity * price, price, 1)`.
 3. **Shuffle & Sort Phase**: Dữ liệu từ các Mapper được băm (hash-partition) và truyền qua mạng, gom toàn bộ bản ghi có cùng `category` về đúng một Reducer.
@@ -159,6 +177,7 @@ GROUP BY category;
 5. **Ghi kết quả**: Kết quả cuối cùng được xuất ra màn hình và lưu tạm trên HDFS.
 
 ### Kết quả truy vấn thực tế:
+
 ```text
 MapReduce Jobs Launched: 
 Stage-Stage-1: Map: 1  Reduce: 1   Cumulative CPU: 65.87 sec   HDFS Read: 20239 HDFS Write: 165 SUCCESS
@@ -179,6 +198,7 @@ Tất cả các bài toán đều đọc dữ liệu từ HDFS: `hdfs://toan-mas
 ---
 
 ## 4.1. Bài toán 1: WordCount (Đếm tần suất từ)
+
 - **Thành viên phụ trách**: **Lê Tuấn Anh** (`anh-slave1`)
 - **Mã nguồn**: `pyspark_jobs/01_workcount.py`
 - **Nguyên lý giải thuật**:
@@ -194,10 +214,14 @@ Tất cả các bài toán đều đọc dữ liệu từ HDFS: `hdfs://toan-mas
 ---
 
 ## 4.2. Bài toán 2: WordMean (Độ dài trung bình của từ)
+
 - **Thành viên phụ trách**: **Phạm Quốc Huy** (`huy-slave2`)
 - **Mã nguồn**: `pyspark_jobs/02_wordmean.py`
 - **Công thức toán học**:
-  $$\bar{L} = \frac{\sum_{i=1}^N \text{len}(w_i)}{N}$$
+  $$
+  \bar{L} = \frac{\sum_{i=1}^N \text{len}(w_i)}{N}
+  $$
+
   - $N$: Tổng số lượng từ trong văn bản.
   - $\text{len}(w_i)$: Độ dài (số ký tự) của từ thứ $i$.
 - **Nguyên lý giải thuật**:
@@ -213,6 +237,7 @@ Tất cả các bài toán đều đọc dữ liệu từ HDFS: `hdfs://toan-mas
 ---
 
 ## 4.3. Bài toán 3: WordMedian (Trung vị độ dài của từ)
+
 - **Thành viên phụ trách**: **Phạm Quốc Huy** (`huy-slave2`)
 - **Mã nguồn**: `pyspark_jobs/03_wordmedian.py`
 - **Công thức toán học**:
@@ -232,27 +257,63 @@ Tất cả các bài toán đều đọc dữ liệu từ HDFS: `hdfs://toan-mas
 ---
 
 ## 4.4. Bài toán 4: WordStandardDeviation (Độ lệch chuẩn độ dài từ)
-- **Thành viên phụ trách**: **Trần Đăng Khoa** (`khoa-slave3`)
+
+- **Thành viên phụ trách**: **Phạm Đức Khoa** (`khoa-slave3`)
 - **Mã nguồn**: `pyspark_jobs/04_workstd.py`
 - **Công thức toán học**:
-  $$\sigma = \sqrt{\frac{1}{N} \sum_{i=1}^N (L_i - \bar{L})^2}$$
+
+  $$
+  \sigma = \sqrt{\frac{1}{N} \sum_{i=1}^N (L_i - \bar{L})^2}
+  $$
+
   - $\bar{L}$: Độ dài trung bình (Mean) đã tính ở Bài toán 2.
   - $L_i$: Độ dài của từ thứ $i$.
   - $N$: Tổng số từ.
 - **Nguyên lý giải thuật (Two-pass RDD MapReduce)**:
+
   - **Pass 1**: Tính $\bar{L}$ và $N$ bằng Reduce.
   - **Pass 2**: Map mỗi từ thành bình phương sai số: $(L_i - \bar{L})^2$.
   - `reduce`: Tính tổng các bình phương sai số: $S = \sum (L_i - \bar{L})^2$.
   - Tính Phương sai (Variance): $\text{Var} = S / N$.
   - Tính Độ lệch chuẩn: $\sigma = \sqrt{\text{Var}}$.
 - **Lệnh submit**:
+
   ```bash
-  spark-submit --master yarn --deploy-mode client /home/hadoop/pyspark_jobs/04_workstd.py
+  spark-submit --master yarn --deploy-mode client \
+    --num-executors 1 --executor-memory 512m --executor-cores 1 \
+    --driver-memory 512m /home/hadoop/pyspark_jobs/04_workstd.py
   ```
+
+### Kết quả thực thi và đối chiếu
+
+Với file `data/input.txt`, chương trình xử lý 423 từ trên 2 phân vùng và cho kết quả:
+
+```text
+Độ dài trung bình: 5.791962
+Phương sai tổng thể: 8.623387
+Độ lệch chuẩn tổng thể: 2.936560
+```
+
+Kết quả trên được đối chiếu bằng hàm `statistics.pstdev` của Python và cùng trả về
+`2.936560`. Ứng dụng Spark trên YARN kết thúc với trạng thái `FINISHED/SUCCEEDED`;
+executor và các task được YARN cấp chạy trên `khoa-slave3`.
+
+### Đo thời gian
+
+| Chế độ                  |   Số executor   | Thời gian xử lý RDD | Tổng thời gian lệnh |
+| :------------------------- | :---------------: | ---------------------: | ---------------------: |
+| Spark local (`local[2]`) | 1 driver cục bộ |            3.745 giây |           12.353 giây |
+| Spark trên YARN           |    1 executor    |            4.361 giây |           28.831 giây |
+
+Tập dữ liệu kiểm thử chỉ khoảng 2.9 KB nên thời gian khởi tạo ứng dụng, tải thư viện
+Spark lên HDFS và xin tài nguyên từ YARN lớn hơn thời gian tính toán. Vì vậy kết quả này
+dùng để xác nhận chương trình chạy phân tán đúng, chưa đủ để kết luận Spark local nhanh
+hơn Spark trên YARN với dữ liệu lớn.
 
 ---
 
 ## 4.5. Bài toán 5 (Nâng cao): E-commerce Retail Analytics với Spark SQL
+
 - **Thành viên phụ trách**: **Nguyễn Đức Toàn** (`toan-master`)
 - **Mã nguồn**: `pyspark_jobs/05_ecommerce_analytics.py`
 - **Mô tả**:
@@ -266,17 +327,21 @@ Tất cả các bài toán đều đọc dữ liệu từ HDFS: `hdfs://toan-mas
 # PHẦN 5: BỘ CÂU HỎI VẤN ĐÁP BẢO VỆ ĐỒ ÁN (DÀNH CHO NHÓM ÔN TẬP)
 
 ### Câu 1: Tại sao cụm lại cần SecondaryNameNode? SecondaryNameNode có thay thế được NameNode khi NameNode chết không?
+
 - **Trả lời**: SecondaryNameNode **KHÔNG PHẢI** là máy chủ dự phòng (Standby NameNode). Nhiệm vụ của nó là định kỳ tải file `fsimage` (ảnh chụp hệ thống tệp) và file `edits` (nhật ký thao tác) từ NameNode về để hợp nhất (checkpoint), tạo ra file `fsimage.ckpt` mới rồi gửi ngược lại cho NameNode. Điều này giúp file nhật ký `edits` của NameNode không bị phình to vô hạn, giúp NameNode khởi động nhanh hơn.
 
 ### Câu 2: Làm sao chứng minh dữ liệu và tính toán được phân tán trên 3 máy Worker mà không phải chạy cục bộ trên 1 máy?
+
 - **Trả lời**:
   1. Dùng lệnh `hdfs fsck /user/hive/warehouse/retail_warehouse.db/sales_records -files -blocks -locations`, kết quả in ra rõ ràng các block dữ liệu được sao chép sang cả 3 máy: `172.28.0.3` (`anh-slave1`), `172.28.0.4` (`huy-slave2`), `172.28.0.5` (`khoa-slave3`).
   2. Truy cập YARN Web UI ([http://localhost:8088](http://localhost:8088)) và JobHistory UI ([http://localhost:19888](http://localhost:19888)): Kiểm tra danh sách Task Containers sẽ thấy Mapper và Reducer được cấp phát trên các node slave khác nhau dựa trên cơ chế Data Locality.
 
 ### Câu 3: Sự khác biệt cơ bản giữa Apache Hive và Apache Spark là gì?
+
 - **Trả lời**:
   - **Hive**: Là Data Warehouse lưu trữ trên HDFS, chuyển đổi SQL thành các job MapReduce cổ điển. Xử lý ghi/đọc liên tục xuống đĩa cứng (Disk I/O) nên độ trễ cao, phù hợp cho các bài toán phân tích hàng loạt (Batch Processing) ban đêm hoặc khối dữ liệu khổng lồ vài chục Terabyte.
   - **Spark**: Là engine tính toán trong bộ nhớ (In-Memory Processing). Dữ liệu được lưu trong RAM dưới dạng các RDD / DataFrame, xử lý theo đồ thị có hướng (DAG), giúp tốc độ nhanh hơn Hive từ 10 đến 100 lần.
 
 ### Câu 4: Lỗi `ClassNotFoundException: org.apache.hadoop.mapreduce.v2.app.MRAppMaster` đã từng xảy ra trên cụm và nhóm đã khắc phục như thế nào?
+
 - **Trả lời**: Trên Hadoop 3.x, khi chạy MapReduce trên YARN, ApplicationMaster cần biết chính xác thư mục chứa các thư viện mapreduce. Nhóm đã bổ sung biến môi trường `yarn.app.mapreduce.am.env=HADOOP_MAPRED_HOME=/opt/hadoop` trong `mapred-site.xml` và khai báo biến `yarn.application.classpath` trong `yarn-site.xml` để YARN nạp đầy đủ classpath cho container.
