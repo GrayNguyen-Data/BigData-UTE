@@ -1,6 +1,8 @@
 # BÁO CÁO CUỐI KỲ MÔN NHẬP MÔN DỮ LIỆU LỚN
 # ĐỀ TÀI: XÂY DỰNG CỤM BIG DATA PHÂN TÁN MULTI-NODE (HADOOP, YARN, HIVE, SPARK) TRÊN DOCKER VÀ THỰC THI 4 THUẬT TOÁN MAPREDUCE BẰNG PYSPARK
 
+> **Lưu ý rà soát ngày 22/10/2026:** Đây là bản thảo có nội dung kết quả cần đối chiếu lại. Năm file trong `pyspark_jobs/` hiện đang rỗng, vì vậy chưa thể xác nhận các thuật toán PySpark chạy được. Các job ID, thời gian chạy, trạng thái hoàn thành và kết quả bên dưới chỉ nên giữ nếu nhóm còn log/ảnh minh chứng từ lần chạy thực tế. Tham khảo [khung báo cáo và ôn tập](./KHUNG_BAO_CAO_VA_ON_TAP.md) để biết các điểm cần kiểm chứng và cách phân biệt Spark trên YARN với Hadoop MapReduce.
+
 ---
 
 ## 🏛️ THÔNG TIN CHUNG
