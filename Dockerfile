@@ -44,10 +44,10 @@ RUN curl -fSL --retry 5 --retry-delay 3 "https://dlcdn.apache.org/hadoop/common/
     mv /opt/hadoop-${HADOOP_VERSION} ${HADOOP_HOME} && \
     rm /tmp/hadoop.tar.gz
 
-# 5. Tải và cài đặt Apache Spark 3.5.8 (Bản mới nhất và có sẵn trên DLCdn)
+# 5. Tải và cài đặt Apache Spark 3.5.8 từ mirror Huawei Cloud
 ENV SPARK_VERSION=3.5.8
 ENV SPARK_HOME=/opt/spark
-RUN curl -fSL --retry 5 --retry-delay 3 "https://dlcdn.apache.org/spark/spark-${SPARK_VERSION}/spark-${SPARK_VERSION}-bin-hadoop3.tgz" -o /tmp/spark.tar.gz && \
+RUN curl -fSL --connect-timeout 20 --retry 5 --retry-delay 3 "https://repo.huaweicloud.com/apache/spark/spark-${SPARK_VERSION}/spark-${SPARK_VERSION}-bin-hadoop3.tgz" -o /tmp/spark.tar.gz && \
     tar -xzf /tmp/spark.tar.gz -C /opt && \
     mv /opt/spark-${SPARK_VERSION}-bin-hadoop3 ${SPARK_HOME} && \
     rm /tmp/spark.tar.gz

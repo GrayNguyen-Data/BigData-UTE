@@ -1,16 +1,17 @@
 # ĐỒ ÁN CUỐI KỲ: HỆ SINH THÁI DỮ LIỆU LỚN (BIG DATA ECOSYSTEM)
+
 ## Đề tài: Xây Dựng Cụm Big Data Phân Tán Đa Node (Hadoop, YARN, Hive, Spark) trên Docker và Cài Đặt 4 Thuật Toán MapReduce Bằng PySpark
 
 ---
 
 ## 👥 1. BẢNG PHÂN CÔNG NHIỆM VỤ VÀ ĐÁNH GIÁ (TEAM ROLES & CONTRIBUTIONS)
 
-| STT | Họ và Tên | Vai trò / Node Cluster | Nhiệm vụ chính được phân công | Mức độ hoàn thành |
-|:---:|:---|:---|:---|:---:|
-| **1** | **Nguyễn Đức Toàn** *(Trưởng nhóm)* | **Master Node** (`toan-master`) | - Thiết kế kiến trúc cụm Docker Multi-node (5 container).<br>- Cấu hình NameNode, ResourceManager, HDFS & YARN Core.<br>- Thiết lập Apache Hive Warehouse kết nối PostgreSQL Metastore.<br>- Viết bài toán nâng cao PySpark DataFrame SQL Analytics. | **100%** |
-| **2** | **Lê Tuấn Anh** | **Worker Node 1** (`anh-slave1`) | - Cấu hình DataNode & NodeManager 1.<br>- Viết mã nguồn & thực thi thuật toán **Bài toán 1: WordCount** bằng PySpark trên YARN.<br>- Kiểm tra phân vùng dữ liệu và tổng hợp tần suất từ. | **100%** |
-| **3** | **Phạm Quốc Huy** | **Worker Node 2** (`huy-slave2`) | - Cấu hình DataNode & NodeManager 2.<br>- Viết mã nguồn & thực thi **Bài toán 2: WordMean** (độ dài trung bình của từ).<br>- Viết mã nguồn & thực thi **Bài toán 3: WordMedian** (trung vị độ dài từ). | **100%** |
-| **4** | **Trần Đăng Khoa** | **Worker Node 3** (`khoa-slave3`) | - Cấu hình DataNode & NodeManager 3.<br>- Viết mã nguồn & thực thi **Bài toán 4: WordStandardDeviation** (độ lệch chuẩn độ dài từ).<br>- Đo đạc hiệu năng phân tán MapReduce và đối chiếu kết quả. | **100%** |
+|     STT     | Họ và Tên                                       | Vai trò / Node Cluster                   | Nhiệm vụ chính được phân công                                                                                                                                                                                                                   | Mức độ hoàn thành |
+| :---------: | :------------------------------------------------- | :---------------------------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | :--------------------: |
+| **1** | **Nguyễn Đức Toàn** *(Trưởng nhóm)* | **Master Node** (`toan-master`)   | - Thiết kế kiến trúc cụm Docker Multi-node (5 container).- Cấu hình NameNode, ResourceManager, HDFS & YARN Core.- Thiết lập Apache Hive Warehouse kết nối PostgreSQL Metastore.- Viết bài toán nâng cao PySpark DataFrame SQL Analytics. |     **100%**     |
+| **2** | **Lê Tuấn Anh**                            | **Worker Node 1** (`anh-slave1`)  | - Cấu hình DataNode & NodeManager 1.- Viết mã nguồn & thực thi thuật toán **Bài toán 1: WordCount** bằng PySpark trên YARN.- Kiểm tra phân vùng dữ liệu và tổng hợp tần suất từ.                                           |     **100%**     |
+| **3** | **Phạm Quốc Huy**                          | **Worker Node 2** (`huy-slave2`)  | - Cấu hình DataNode & NodeManager 2.- Viết mã nguồn & thực thi **Bài toán 2: WordMean** (độ dài trung bình của từ).- Viết mã nguồn & thực thi **Bài toán 3: WordMedian** (trung vị độ dài từ).                     |     **100%**     |
+| **4** | **Phạm Đức Khoa**                         | **Worker Node 3** (`khoa-slave3`) | - Cấu hình DataNode & NodeManager 3.- Viết mã nguồn & thực thi **Bài toán 4: WordStandardDeviation** (độ lệch chuẩn độ dài từ).- Đo đạc hiệu năng phân tán MapReduce và đối chiếu kết quả.                           |     **100%**     |
 
 ---
 
@@ -47,12 +48,12 @@ Cụm phân tán hoạt động trên mạng nội bộ Docker `bigdata_net` (`1
 
 ### 🌐 Danh mục Cổng & Web UI Giám sát Hệ thống:
 
-| Tên Dịch Vụ | Địa chỉ Web UI | Chức năng minh chứng báo cáo |
-|:---|:---|:---|
-| **HDFS NameNode** | [http://localhost:9870](http://localhost:9870) | Xem dung lượng cụm, 3 DataNode Live, duyệt cây thư mục HDFS Explorer. |
-| **YARN ResourceManager** | [http://localhost:8088](http://localhost:8088) | Xem tiến độ các ứng dụng MapReduce & Spark đang chạy phân tán trên cụm. |
-| **MapReduce JobHistory** | [http://localhost:19888](http://localhost:19888) | Xem chi tiết số lượng Mapper, Reducer, Node thực thi từng task. |
-| **HiveServer2 Web UI** | [http://localhost:10002](http://localhost:10002) | Giám sát các truy vấn SQL đang kết nối qua HiveServer2. |
+| Tên Dịch Vụ                 | Địa chỉ Web UI                               | Chức năng minh chứng báo cáo                                                   |
+| :----------------------------- | :---------------------------------------------- | :---------------------------------------------------------------------------------- |
+| **HDFS NameNode**        | [http://localhost:9870](http://localhost:9870)   | Xem dung lượng cụm, 3 DataNode Live, duyệt cây thư mục HDFS Explorer.        |
+| **YARN ResourceManager** | [http://localhost:8088](http://localhost:8088)   | Xem tiến độ các ứng dụng MapReduce & Spark đang chạy phân tán trên cụm. |
+| **MapReduce JobHistory** | [http://localhost:19888](http://localhost:19888) | Xem chi tiết số lượng Mapper, Reducer, Node thực thi từng task.               |
+| **HiveServer2 Web UI**   | [http://localhost:10002](http://localhost:10002) | Giám sát các truy vấn SQL đang kết nối qua HiveServer2.                      |
 
 ---
 
@@ -87,7 +88,7 @@ Bigdata-project/
     ├── 01_workcount.py         # [Lê Tuấn Anh] Đếm tần suất xuất hiện của từ
     ├── 02_wordmean.py          # [Phạm Quốc Huy] Tính độ dài trung bình của từ
     ├── 03_workmedian.py        # [Phạm Quốc Huy] Tính trung vị độ dài từ
-    ├── 04_workstd.py           # [Trần Đăng Khoa] Tính độ lệch chuẩn độ dài từ
+    ├── 04_workstd.py           # [Phạm Đức Khoa] Tính độ lệch chuẩn độ dài từ
     └── 05_ecommerce_analytics.py # [Nguyễn Đức Toàn] Phân tích thương mại điện tử với Spark SQL
 ```
 
@@ -96,19 +97,25 @@ Bigdata-project/
 ## 🚀 4. HƯỚNG DẪN VẬN HÀNH CỤM (QUICKSTART)
 
 ### Bước 1: Khởi động toàn bộ container
+
 Mở PowerShell tại thư mục dự án `e:\Bigdata-project`:
+
 ```powershell
 docker compose up -d
 ```
+
 Kiểm tra trạng thái các container:
+
 ```powershell
 docker compose ps
 ```
+
 *(Cần đảm bảo 5 container: `postgres-metastore`, `toan-master`, `anh-slave1`, `huy-slave2`, `khoa-slave3` đều ở trạng thái `Up`).*
 
 ---
 
 ### Bước 2: Đăng nhập vào node Master
+
 ```powershell
 docker exec -it toan-master bash
 ```
@@ -116,7 +123,9 @@ docker exec -it toan-master bash
 ---
 
 ### Bước 3: Khởi động các dịch vụ Hadoop & Hive (Bằng Script tự động)
+
 Trong terminal của `toan-master`, chạy 3 script tự động có sẵn:
+
 ```bash
 # 1. Khởi động HDFS + YARN + JobHistoryServer
 bash /home/hadoop/scripts/start-hadoop.sh
@@ -129,6 +138,7 @@ bash /home/hadoop/scripts/upload-data-to-hdfs.sh
 ```
 
 Kiểm tra tiến trình Java bằng lệnh `jps`, trên `toan-master` phải có đủ:
+
 - `NameNode`
 - `SecondaryNameNode`
 - `ResourceManager`
@@ -137,4 +147,3 @@ Kiểm tra tiến trình Java bằng lệnh `jps`, trên `toan-master` phải c�
 - `RunJar` (HiveServer2)
 
 ---
-
